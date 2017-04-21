@@ -2,7 +2,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" (click)="close()">&times;</button>
-            <div class="title">{{title}}</div>
+            <div class="title" (click)="change_card_name()" [style.display]="change_card_name_val==true?'block':'none'">{{title}}</div>
+            <input #newCardName class="change_card_name" value={{title}} 
+                   [style.display]="change_card_name_val==false?'block':'none'"
+                   (keydown)="edit_card_name($event, newCardName.value)">
         </div>
         <div class="modal-body">
             <div class="description-form">
@@ -25,9 +28,9 @@
                 <button class="confirm" (click)="add_comment(newComment.value)">Send</button>
 
                 <div class="comment_list">Comments:
-                    <p *ngFor="let c of comment"><span style="font-weight: bold">Comment:</span> {{c.title}}<br>
-                        <button class="comment_btn" (click)="edit_comment(c.id)">Edit</button>
-                        <button class="comment_btn" (click)="delete_comment(c.id)">Delete</button>
+                    <p *ngFor="let c of comment"><span style="font-weight: bold">Comment:</span>
+                        <comment [comment]="c" [boardId]="boardId" [cardId]="cardId" [listId]="listId" (deleteComment)="comment_delete($event)"></comment>
+                        <br>
                     </p>
                 </div>
             </div>

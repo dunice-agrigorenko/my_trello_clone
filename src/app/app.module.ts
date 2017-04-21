@@ -9,6 +9,8 @@ import { UserInfo } from './user/user-info.component';
 import { ListsDisplay } from './list/lists-page.component';
 import { Autorization } from './autorization/autorization.component';
 import { CardsDisplay } from './card/cards-page.component';
+import { ListName } from './list/list-name.component';
+import { Comment } from './card/comments/comment.component'
 import { CommonModule } from "@angular/common";
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { CardEditing } from './card/modal.component';
@@ -22,6 +24,8 @@ import { DragulaModule } from 'ng2-dragula';
     ListsDisplay,
     Autorization,
     CardsDisplay,
+    Comment,
+    ListName,
     CardEditing,
   ],
   imports: [
@@ -53,6 +57,10 @@ import { DragulaModule } from 'ng2-dragula';
         path: 'autorization',
         component: Autorization
       },
+      // {
+      //   path: '**',
+      //   component: NotFound
+      // }
     ])
   ],
   providers: [],

@@ -1,0 +1,18 @@
+.edit_comment {
+    resize: none;
+    margin: 10px -15px 0;
+    width: 505px;
+    height: 65px;
+    border-radius: 3px;
+    padding: 10px;
+    outline: none;
+}
+.comment_btn {
+    border: none;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 3px 5px;
+    cursor: pointer;
+    margin: 3px 10px 0 0;
+    text-decoration: underline;
+}

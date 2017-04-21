@@ -4,14 +4,10 @@
 
         <!--Отрисовка листов-->
         <div class="list" *ngFor="let list of lists">
-            <p (click)="edit_form(list.id, list.title)" id={{list.id+1}}>{{list.title}}</p>
-
-            <div style="display: none" id={{list.id}}>
-                <!--Редактирование листа-->
-                <button class="edit_list" (click)="edit_list(editList.value, list.id)" title="Confirm"></button>
-                <input #editList style="padding: 4px; border: none; border-radius: 4px; box-shadow: inset 0 0 5px grey;"
-                                 (keydown)="EditListOnEnter($event, editList.value, list.id)">
-            </div>
+            <p>
+                <list-name [list]="list" [boardId]="boardId"></list-name>
+            </p>
+            
             <!--Удаление листа-->
             <button class="delete_list" (click)="delete_list(list.id)" title="Delete"></button>
 

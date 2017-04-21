@@ -11,7 +11,7 @@ let LISTS: Lists[] = []
   templateUrl: './boards-page.component.html',
   styleUrls: ['./boards-page.component.css'],
   host: {
-    '(document:click)': 'handleClick($event)',
+    '(document:click)': 'outClick($event)',
   },
 })
 
@@ -74,6 +74,8 @@ export class BoardsPage implements OnInit {
     if (event.keyCode == 13) {
       this.create_board(Name);
       this.old_board();
+    } else if (event.keyCode == 27) {
+      this.old_board();
     }
   }
   EditBoardOnEnter(event, Name, ID) { //Создание борда при нажатии ENTER
@@ -127,7 +129,7 @@ export class BoardsPage implements OnInit {
 
   //------------------------------------------------------------------------------------------------------ 
   //Проверка клика вне элемента new_board (взято с http://4dev.tech/2016/03/angular2-tutorial-detecting-clicks-outside-the-component/)
-  handleClick(event) {
+  outClick(event) {
     var clickedComponent = event.target;
     var inside = false;
     do {

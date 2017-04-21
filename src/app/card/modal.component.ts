@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { Cards } from './card';
+import { Comment } from './comments/comment.component';
 
 export interface AlertModel {
   listId: number;
@@ -20,6 +21,7 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
 
   @ViewChild("descriptForm") closet: ElementRef;
   visibility: boolean = false;
+  change_card_name_val: boolean = true;
   listId;
   cardId;
   boardId;
@@ -31,7 +33,7 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
     super(dialogService);
   }
 
-  ngOnInit() {
+  ngOnInit() { /* Подгрузка комментариев и описания */
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
       for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
@@ -44,13 +46,39 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
     }
   }
 
-  edit_descript(descript) {
+  edit_card_name(event, Name) {
+    switch (event.keyCode) {
+      case 13:
+        this.change_card_name_val = true;
+        this.confirm_new_card_name(Name);
+        break;
+      case 27:
+        this.change_card_name_val = !this.change_card_name_val;
+        break;
+    }
+  }
+  confirm_new_card_name(value) {
+    var dataArray = JSON.parse(localStorage.getItem("Boards"));
+    for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
+      for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
+        if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
+          dataArray[this.boardId].lists[j].cards[i].title = value;
+          var serialObj = JSON.stringify(dataArray);
+          localStorage.setItem("Boards", serialObj);
+          this.title = value;
+          break;
+        }
+      }
+    }
+  }
+
+  edit_descript(descript) { /* Редактирование описания */
     this.visibility = !this.visibility;
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
       for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
         if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
-          dataArray[this.boardId].lists[i].cards[i].description = descript;
+          dataArray[this.boardId].lists[j].cards[i].description = descript;
           var serialObj = JSON.stringify(dataArray);
           localStorage.setItem("Boards", serialObj);
           this.description = descript;
@@ -60,18 +88,18 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
     }
   }
 
-  add_comment(new_comment) {
+  add_comment(new_comment) { /* Добавление комментариев */
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     var comment = {
       id: +new Date,
       title: new_comment,
     }
-    if (new_comment.trim() !== "")
+    if (new_comment.trim() !== "") {
       for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
         if (dataArray[this.boardId].lists[j].id == this.listId) {
           for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
             if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
-              dataArray[this.boardId].lists[j].cards[i].comment[dataArray[this.boardId].lists[j].cards[i].comment.length] = comment;
+              dataArray[this.boardId].lists[j].cards[i].comment[dataArray[this.boardId].lists[j].cards[i].comment.length] = comment; // ...
               var serialObj = JSON.stringify(dataArray);
               localStorage.setItem("Boards", serialObj);
               this.comment = dataArray[this.boardId].lists[j].cards[i].comment;
@@ -80,16 +108,17 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
           }
         }
       }
+    }
+  }
+  comment_delete(comment) {
+    this.comment = comment
   }
 
-  delete_comment(id) { //TODO
-    console.log(id);
-  }
-  edit_comment(id) {
-    console.log(id);
-  }
-
-  description_form() {
+  description_form() { /* Отображение формы редактирования описания */
     this.visibility = !this.visibility
+  }
+
+  change_card_name() {
+    this.change_card_name_val = false;
   }
 }

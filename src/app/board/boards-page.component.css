@@ -82,25 +82,22 @@ h3 {
     border: 0px;
     display: block;
     position: absolute;
-    margin: -41px 236px;
-    width: 30px;
-    height: 29px;
-    background: #0071b3;
+    margin: -38px 240px;
+    width: 25px;
+    height: 25px;
+    background-size: 25px;
+    background-color: #0071b3;
     background-image: url('../img/delete.png');
     background-repeat: no-repeat;
-    background-position: -7px -7px;
-    background-size: 45px;
-    opacity: 0.7;
+    opacity: 0.85;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
 }
 .delete:hover {
-    box-shadow: 1px 1px 13px black;
     opacity: 0.95;
 }
 .delete:active {
-    box-shadow: 1px 1px 7px black;
     transform: translateY(0.3px);
     opacity: 1;
 }

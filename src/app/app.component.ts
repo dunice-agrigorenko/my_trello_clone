@@ -29,12 +29,14 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, myElement: ElementRef) { };
 
   ngOnInit() {
-    var Current_user = JSON.parse(localStorage.getItem("Current_user"));
-    if (Current_user !== null) {
-      this.USER_NAME = Current_user[0].name;
-    } else {
-      this.router.navigate(['/autorization']);
-    }
+    var user = JSON.parse(localStorage.getItem("User"));
+    // if (Current_user !== null) {
+    //   this.USER_NAME = Current_user[0].name;
+    // } else {
+    //   this.router.navigate(['/autorization']);
+    // }
+    if (user != null)
+    this.USER_NAME = user[0].name;
   }
   log_out() {
     // var Current_user = JSON.parse(localStorage.getItem("Current_user"));
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
     }
   }
   //-----------------------------------------------------------------------------------------------
-  close_window(argument) {
+  close_window(argument) { /* Закрытие окон */
     switch (argument) {
       case this.visibility_user:
         this.visibility_user = !this.visibility_user;
@@ -81,32 +83,32 @@ export class AppComponent implements OnInit {
     var inside;
     do {
       switch (clickedComponent) {
-        case this.user.nativeElement: {
+        case this.user.nativeElement: { /* Меню пользователя */
           inside = true;
           this.visibility_info = false;
           this.visibility_notif = false;
           break;
-        } case this.usercard.nativeElement: {
+        } case this.usercard.nativeElement: {/* Меню пользователя */
           inside = true;
           this.visibility_info = false;
           this.visibility_notif = false;
           break;
-        } case this.info.nativeElement: {
+        } case this.info.nativeElement: {/* окно информации */
           inside = true;
           this.visibility_notif = false;
           this.visibility_user = false;
           break;
-        } case this.infocard.nativeElement: {
+        } case this.infocard.nativeElement: {/* окно информации */
           inside = true;
           this.visibility_notif = false;
           this.visibility_user = false;
           break;
-        } case this.notif.nativeElement: {
+        } case this.notif.nativeElement: {/* окно уведомлений */
           inside = true;
           this.visibility_info = false;
           this.visibility_user = false;
           break;
-        } case this.notifcard.nativeElement: {
+        } case this.notifcard.nativeElement: {/* окно уведомлений */
           inside = true;
           this.visibility_info = false;
           this.visibility_user = false;

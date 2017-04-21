@@ -1,0 +1,10 @@
+<div #commentName [style.display]="visibility==false?'inline-block':'none'">
+    {{comment.title}}</div>
+<br>
+<div [style.display]="visibility==true?'inline-block':'none'">
+    <textarea value={{comment.title}} class="edit_comment" #editComment>
+    </textarea>
+    <button (click)="save(editComment.value)">Save</button>
+</div>
+<button class="comment_btn" (click)="edit_comment()">Edit</button>
+<button class="comment_btn" (click)="delete_comment()">Delete</button>

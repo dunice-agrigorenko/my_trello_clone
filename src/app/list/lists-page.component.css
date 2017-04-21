@@ -122,13 +122,12 @@ p {
     display: block;
     position: relative;
     margin: -15px 236px;
-    bottom: 10px;;
-    width: 30px;
-    height: 29px;
+    bottom: 10px;
+    width: 25px;
+    height: 25px;
     background-image: url('../img/delete.png');
     background-repeat: no-repeat;
-    background-position: -7px -7px;
-    background-size: 45px;
+    background-size: 25px;
     opacity: 0.7;
     border-radius: 3px;
     cursor: pointer;

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Cards } from '../card/card';
 import { Subscription } from 'rxjs/Subscription';
 import { CardsDisplay } from '../card/cards-page.component';
+import { ListName } from './list-name.component';
 
 var CARDS: Cards[] = [];
 
@@ -11,7 +12,7 @@ var CARDS: Cards[] = [];
   templateUrl: './lists-page.component.html',
   styleUrls: ['./lists-page.component.css'],
   host: {
-    '(document:click)': 'handleClick($event)',
+    '(document:click)': 'outClick($event)',
   },
 })
 
@@ -19,6 +20,7 @@ export class ListsDisplay implements OnInit, OnDestroy {
   @ViewChild("newListName") newList: ElementRef;
   @ViewChild("createListForm") createListForm: ElementRef;
   @ViewChild("createList") createList: ElementRef;
+  @ViewChild("editList") editList: ElementRef;
   visibility: boolean = false;
   title = ''; /* название страницы */
   boardId = 0; /* № доски в localStorage */
@@ -98,20 +100,6 @@ export class ListsDisplay implements OnInit, OnDestroy {
     this.lists = dataArray[this.boardId].lists;
   }
 
-  edit_list(value, id) { /* Редактирование листа */
-    let dataArray = JSON.parse(localStorage.getItem("Boards"));
-    if (value.trim() !== "")
-      for (let i = 0; i <= dataArray[this.boardId].lists.length; i++) {
-        if (dataArray[this.boardId].lists[i].id == id) {
-          dataArray[this.boardId].lists[i].title = value;
-          break;
-        }
-      }
-    var serialObj = JSON.stringify(dataArray);
-    localStorage.setItem("Boards", serialObj);
-    this.lists = dataArray[this.boardId].lists;
-  }/**********************************************************************************/
-
   delete_card(listId, cardId) {
     let dataArray = JSON.parse(localStorage.getItem("Boards"));
     /******* Удаление нужной нам карты из хранилища и удаление её со страницы ********/
@@ -129,23 +117,7 @@ export class ListsDisplay implements OnInit, OnDestroy {
     this.lists = dataArray[this.boardId].lists;
   }
 
-  edit_form(id, title) {
-    document.getElementById(id).style.display = "block";
-    document.getElementById(id + 1).style.display = "none";
-  }
-
-  EditListOnEnter(event, Name, ID) { //Редактирование листа при нажатии ENTER
-    switch (event.keyCode) {
-      case 13:
-        this.edit_list(Name, ID);
-        break;
-      case 27:
-        document.getElementById(ID).style.display = "none";
-        document.getElementById(ID + 1).style.display = "block";
-    }
-  }
-
-  new_list_form() {
+  new_list_form() { /* Отображение формы ввода листа */
     this.visibility = !this.visibility;
   }
 
@@ -161,7 +133,7 @@ export class ListsDisplay implements OnInit, OnDestroy {
         break;
     }
   }
-  handleClick(event) {
+  outClick(event) { /* Проверка клика вне эл-та */
     var clickedComponent = event.target;
     var inside = false;
     do {

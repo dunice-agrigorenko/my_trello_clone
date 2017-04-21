@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { Cards } from './card';
 import { ListsDisplay } from '../list/lists-page.component';
 import { Lists } from '../list/list';
@@ -7,14 +7,13 @@ import { DialogService } from "ng2-bootstrap-modal";
 import { DragulaModule } from 'ng2-dragula';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
-
 @Component({
     selector: 'cards',
     templateUrl: './cards-page.component.html',
     styleUrls: ['./cards-page.component.css'],
     host: {
-    '(document:click)': 'handleClick($event)',
-  },
+        '(document:click)': 'outClick($event)',
+    },
 })
 
 export class CardsDisplay {
@@ -22,11 +21,12 @@ export class CardsDisplay {
     @ViewChild("cardName") cardName: ElementRef;
     @ViewChild("newCard") newCard: ElementRef;
     @ViewChild("newCardForm") newCardForm: ElementRef;
-    visibility:boolean = false;
+    visibility: boolean = false;
 
     boardId = 0;
 
     constructor(private dialogService: DialogService, private dragulaService: DragulaService) {
+        /*************************** Код ниже нужен для драг энд дропа TODO *******************************/
         dragulaService.drop.subscribe((value) => {
             this.onDropModel(value);
             console.log(value)
@@ -37,17 +37,17 @@ export class CardsDisplay {
         console.log(args)
         // do something else
     }
+    /*************************************************************************************************/
 
 
-
-    showAlert(title, cardid, listid) {
+    showAlert(title, cardid, listid) { /* Вызов модального окна при клике на карту */
         this.dialogService.addDialog(CardEditing,
             { title: title, cardId: cardid, listId: listid, boardId: this.boardId },
             { closeByClickingOutside: true, backdropColor: 'rgba(0, 0, 0, 0.5)' });
     }
 
 
-    add_card(title, id) {
+    add_card(title, id) { /* Добавление карты */
         var dataArray = JSON.parse(localStorage.getItem("Boards"));
         this.visibility = !this.visibility
         var card = {
@@ -85,41 +85,41 @@ export class CardsDisplay {
         }
     }
 
-    new_card_form_vis(){
+    new_card_form_vis() { /* Отображение формы для ввода новой карты, при клике на соотв. эл-т */
         this.visibility = !this.visibility
     }
 
-    NewCardOnEnter(event, Name, ID) { //Создание борда при нажатии ENTER  
-    switch (event.keyCode) {
-      case 13:
-        this.visibility = true;
-        this.add_card(Name, ID);
-        this.cardName.nativeElement.value = "";
-        break;
-      case 27:
-        this.visibility = !this.visibility;
-        this.cardName.nativeElement.value = "";
-        break;
+    NewCardOnEnter(event, Name, ID) { /* Создание борда при нажатии ENTER */
+        switch (event.keyCode) {
+            case 13:
+                this.visibility = true;
+                this.add_card(Name, ID);
+                this.cardName.nativeElement.value = "";
+                break;
+            case 27:
+                this.visibility = !this.visibility;
+                this.cardName.nativeElement.value = "";
+                break;
+        }
     }
-  }
 
-  handleClick(event) {
-    var clickedComponent = event.target;
-    var inside = false;
-    do {
-      switch (clickedComponent) {
-        case this.newCard.nativeElement: {
-          inside = true;
+    outClick(event) { /* Проверка на клик вне формы создания новой карты */
+        var clickedComponent = event.target;
+        var inside = false;
+        do {
+            switch (clickedComponent) {
+                case this.newCard.nativeElement: {
+                    inside = true;
+                }
+                case this.newCardForm.nativeElement: {
+                    inside = true;
+                }
+            }
+            clickedComponent = clickedComponent.parentNode;
+        } while (clickedComponent);
+        if (!inside) {
+            this.visibility = false;
+            this.cardName.nativeElement.value = "";
         }
-        case this.newCardForm.nativeElement: {
-          inside = true;
-        }
-      }
-      clickedComponent = clickedComponent.parentNode;
-    } while (clickedComponent);
-    if (!inside) {
-      this.visibility = false;
-      this.cardName.nativeElement.value = "";
     }
-  }
 }
