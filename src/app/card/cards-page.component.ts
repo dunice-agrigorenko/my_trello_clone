@@ -29,7 +29,6 @@ export class CardsDisplay {
         /*************************** Код ниже нужен для драг энд дропа TODO *******************************/
         dragulaService.drop.subscribe((value) => {
             this.onDropModel(value);
-            console.log(value)
         });
     }
     private onDropModel(args) {

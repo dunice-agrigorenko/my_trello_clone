@@ -45,18 +45,14 @@ export class Comment {
     delete_comment() { /******************************* Удаление комментария **********************************/
         var dataArray = JSON.parse(localStorage.getItem("Boards"));
         for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
-            if (dataArray[this.boardId].lists[j].id == this.listId) {
-                for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
-                    if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
-                        for (let k = 0; k < dataArray[this.boardId].lists[j].cards[i].comment.length; k++) {
-                            if (dataArray[this.boardId].lists[j].cards[i].comment[k].id == this.comment.id) {
-                                dataArray[this.boardId].lists[j].cards[i].comment.splice(k, 1);
-                                var serialObj = JSON.stringify(dataArray);
-                                localStorage.setItem("Boards", serialObj);
-                                this.deleteComment.emit(dataArray[this.boardId].lists[j].cards[i].comment);
-                                break;
-                            }
-                        }
+            for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
+                for (let k = 0; k < dataArray[this.boardId].lists[j].cards[i].comment.length; k++) {
+                    if (dataArray[this.boardId].lists[j].cards[i].comment[k].id == this.comment.id) {
+                        dataArray[this.boardId].lists[j].cards[i].comment.splice(k, 1);
+                        var serialObj = JSON.stringify(dataArray);
+                        localStorage.setItem("Boards", serialObj);
+                        this.deleteComment.emit(dataArray[this.boardId].lists[j].cards[i].comment);
+                        break;
                     }
                 }
             }
