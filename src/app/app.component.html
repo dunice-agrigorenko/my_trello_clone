@@ -1,3 +1,69 @@
-<h1>
-  {{title}}
-</h1>
+<div id="header">
+  <!--При нажатии на кнопку "Boards" будет отображаться содержимое компонента Board-page.component-->
+  <a routerLink="/boards">
+    <div class="boards_btn">Boards</div>
+  </a>
+  <input id="search">
+  <div id="search_btn"></div>
+
+  <a routerLink="/boards">
+    <div class="title"></div>
+  </a>
+
+  <!--Кнопка User-->
+  <div class="user" (click)="show_user()" #showUser>{{USER_NAME}}</div>
+  <div [style.display]="visibility_user==true?'block':'none'" #userCard id="show_user">
+    <div id="info_header">
+      {{USER_NAME}}
+      <button id="close_info" (click)="close_window(visibility_user)"></button>
+    </div>
+
+    <div class="user_menu">
+      <ul>
+        <a routerLink="/user-info">
+          <li>Profile</li>
+        </a>
+        <li>Cards</li>
+        <li>Settings</li>
+        <hr>
+        <li>Help</li>
+        <li>Shortcuts</li>
+        <li>Change Language...</li>
+        <hr>
+        <!--<a routerLink="/autorization">-->
+        <li (click)="log_out()">Log Out</li>
+        <!--</a>-->
+      </ul>
+    </div>
+  </div>
+
+  <!--Кнопка "Information"-->
+  <div id="information" title="Information" #showInfo (click)="show_info()"></div>
+  <!--Окно с информацией-->
+  <div [style.display]="visibility_info==true?'block':'none'" #infoCard id="show_info">
+    <div id="info_header">
+      Information
+      <button id="close_info" (click)="close_window(visibility_info)"></button>
+    </div>
+
+    <div class="info_content">
+      <div class="image_info"></div>
+      <h3>Get Inspired By Dozens Of Different Trello Workflows</h3>
+    </div>
+  </div>
+
+  <!--Кнопка Notifications-->
+  <div id="notifications" title="Notifications" #showNotif (click)="show_notif()"></div>
+  <!--Окно с уведомлениями-->
+  <div [style.display]="visibility_notif==true?'block':'none'" #notifCard id="show_notif">
+    <div id="info_header">
+      Notifications
+      <button id="close_notif" (click)="close_window(visibility_notif)"></button>
+    </div>
+
+    <div id="notif_content">{{notif_content}}</div>
+  </div>
+</div>
+
+<!--Место где будут отображаться все routes-->
+<router-outlet></router-outlet>

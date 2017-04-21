@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()">&times;</button>
+            <div class="title">{{title}}</div>
+        </div>
+        <div class="modal-body">
+            <div class="description-form">
+                <p>
+                    <span style="color: #888">Description:</span> <a (click)="description_form()">Edit</a><br>
+                </p>
+                <pre><p>
+                    <span style="position:relative; top:10px" [style.display]="visibility==false?'block':'none'">{{description}}</span>
+                </p></pre>
+
+                <div class="description_form" [style.display]="visibility==true?'block':'none'">
+                    <textarea class="new_comment descript_change" #descript value={{description}}></textarea>
+                    <button class="confirm" (click)="edit_descript(descript.value)">Save</button>
+                </div>
+            </div>
+
+            <div class="comment_form">
+                Add comment:<br>
+                <textarea class="new_comment" placeholder="Write a comment..." #newComment></textarea>
+                <button class="confirm" (click)="add_comment(newComment.value)">Send</button>
+
+                <div class="comment_list">Comments:
+                    <p *ngFor="let c of comment"><span style="font-weight: bold">Comment:</span> {{c.title}}<br>
+                        <button class="comment_btn" (click)="edit_comment(c.id)">Edit</button>
+                        <button class="comment_btn" (click)="delete_comment(c.id)">Delete</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

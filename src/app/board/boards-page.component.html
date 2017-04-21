@@ -1,0 +1,47 @@
+<div class="wrapper">
+
+    <div id="person"></div>
+    <h3>
+        {{title}}
+    </h3>
+
+    <div class="clear"></div>
+    <!--Граница между текстом и досками-->
+
+    <div *ngFor="let board of boards_array">
+        <!--Отрисовка досок из массива-->
+
+        <a routerLink="/board/{{board.id}}">
+            <div class="board">{{board.title}}</div>
+        </a>
+        <!---->
+
+        <!--кнопка удаления доски-->
+        <button class="delete" (click)="delete_board(board.id)" title="Delete"></button>
+
+        <!--кнопка редактирования названия доски-->
+        <button class="edit" (click)="edit_board(board.id ,board.title)" title="Edit"></button>
+
+        <div class="edit_form" id={{board.id}}>
+            <!--Форма для изменения названия доски-->
+            <textarea class="input_new_name" 
+                        id={{board.id+1}} 
+                        #txtarea 
+                        (keydown)="EditBoardOnEnter($event, txtarea.value, board.id)" >
+            </textarea>
+
+            <!--кнопка "принять изменения" после правки названия доски-->
+            <button class="confirm" (click)="confirm(board.id , txtarea.value)" title="Confirm"></button>
+        </div>
+    </div>
+    <!--Блок, при нажатии на который появляется форма ввода-->
+    <div id="new_board" [style.display]="visibility_newBoard==true?'block':'none'" (click)="new_board()" #newBoard>{{newBoardTitle}}</div>
+
+    <!--Форма ввода названия для создания новой доски-->
+    <div id="new_board_vis" [style.display]="visibility_newForm==true?'block':'none'" #newForm>
+        <input type="text" placeholder="Enter board name" id="enter_name" #entername (keydown)="NewBoardOnEnter($event, entername.value)">
+        <button id="create" (click)="create_board(entername.value)" (click)="old_board()">Create</button>
+    </div>
+
+</div>
+<router-outlet></router-outlet>

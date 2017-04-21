@@ -1,0 +1,101 @@
+.card {
+    width: 240px;
+    height: 45px;
+    border-radius: 3px;
+    background: white;
+    color: #4d4d4d;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: normal;
+    box-shadow: 0 2px lightgrey;
+    margin: 13px 0px 0px;
+}
+.new_card_form {
+    width: 260px;
+    height: 115px;
+    padding: 0 10px;
+    margin: 0 -10px -10px;
+    border-radius: 4px;
+}
+.new_card_form:hover {
+    background: #cccccc;
+}
+.new_card_block {
+    width: 260px;
+    height: 20px;
+    padding: 12px 10px 5px;
+    margin: 0 0 -10px -10px;
+    color: #808080;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.new_card_block:hover {
+    background: #cccccc;
+    border-radius: 5px;
+}
+.new_card_name {
+    position: relative;
+    width: 250px;
+    height: 55px;
+    margin: 10px 0 0;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    resize: none;
+    border: none;
+    box-shadow: inset 0px 0px 5px black;
+}
+.new_card_create_btn {
+    position: relative;
+    margin: 2px 9px 0;
+    width: 60px;
+    height: 26px;
+    color: white;
+    font-weight: bolder;
+    font-size: 15px;
+    outline: none;
+    border: 1px solid #4a9201;
+    background: linear-gradient(#5eba02, #69cf02, #5eba02);
+    border-radius: 5px;
+    box-shadow:
+        0 1px rgba(255,255,255,.2) inset,
+        1px 2px 4px rgba(0,1,6,.5);
+}
+
+.new_card_create_btn:hover {
+    background: linear-gradient(#69cf02, #5eba02, #69cf02);
+}
+.new_card_create_btn:active{
+  border-color: rgba(177,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+.delete_card {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: absolute;
+    margin: -20px 217px;
+    width: 25px;
+    height: 24px;
+    background-image: url('../img/delete.png');
+    background-repeat: no-repeat;
+    background-position: -7px -7px;
+    background-size: 40px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.delete_card:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.delete_card:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}
+.container {
+    min-height: 15px;
+}

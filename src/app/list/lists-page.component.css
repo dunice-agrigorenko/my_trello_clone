@@ -1,0 +1,204 @@
+.wrapper {
+    background-color: #00aecc;
+    height: 96vh;
+}
+p {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+.page {
+    width: inherit;
+    color: white;
+    display: block;
+    padding: 12px 0px 12px 15px;
+    font-weight: bolder;
+    font-size: 20px;
+    overflow-y: auto;
+    max-height: 93vh;
+}
+
+.card {
+    width: 232px;
+    height: 45.5px;
+    border-radius: 3px;
+    padding: 5px;
+    background: white;
+    color: black;
+    box-shadow: 0 2px 5px #595959;
+    margin: 10px 9px 0px;
+}
+.form {
+    padding: 10px;
+    margin: 12px 0;
+    border-radius: 4px;
+    width: 230px;
+    border: none;
+    background: #006c80;
+    color: #bfbfbf;
+    cursor: pointer;
+    font-size: 16px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.list {
+    width: 270px;
+    min-height: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 10px 0 10px 10px;
+    background: #E2E4E6;
+    margin: 10px 10px 0 0;
+    text-align: left;
+    color: #595959;
+    vertical-align: top;
+}
+#create_list {
+    background: #E2E4E6;
+    height: 94px;
+    margin: 0;
+    width: 265px;
+    border-radius: 3px;
+    position: relative;
+    top: 10px;
+    box-shadow: 0 0 5px #595959;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+#new_list_name {
+    background: #d9d9d9;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 10px;
+    margin: 0 0px;
+    width: 230px;
+    position: relative;
+    left: 7px;
+    top: 7px;
+    box-shadow: inset 0px 0px 7px #999999;
+}
+#new_list_name:hover {
+    background: #e6e6e6;
+}
+#new_list_name:focus {
+    background: #d9d9d9;
+    box-shadow: inset 0px 0px 8px #8c8c8c;
+}
+
+#new_list_create_btn {
+    width: 70px;
+    height: 30px;
+    position: relative;
+    color: white;
+    font-weight: bolder;
+    font-size: 15px;
+    top: 15px;
+    left: 8px;
+    outline: none;
+    border: 1px solid #4a9201;
+    background: linear-gradient(#5eba02, #69cf02, #5eba02);
+    border-radius: 5px;
+    box-shadow:
+        0 1px rgba(255,255,255,.2) inset,
+        1px 2px 4px rgba(0,1,6,.5);
+}
+#new_list_create_btn:hover {
+    background: linear-gradient(#69cf02, #5eba02, #69cf02);
+}
+#new_list_create_btn:active{
+  border-color: rgba(177,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+
+.delete_list {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: relative;
+    margin: -15px 236px;
+    bottom: 10px;;
+    width: 30px;
+    height: 29px;
+    background-image: url('../img/delete.png');
+    background-repeat: no-repeat;
+    background-position: -7px -7px;
+    background-size: 45px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.delete_list:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.delete_list:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}
+.delete_card {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: absolute;
+    margin: -20px 204px;
+    width: 30px;
+    height: 29px;
+    background-image: url('../img/delete.png');
+    background-repeat: no-repeat;
+    background-position: -7px -7px;
+    background-size: 45px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.delete_card:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.delete_card:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}
+.edit_list {
+    border: 0px;
+    display: block;
+    position: relative;
+    margin: -15px 180px;
+    top: 10px;
+    background-color: #E2E4E6;
+    width: 30px;
+    height: 29px;
+    background-image: url('../img/confirm.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-size: 30px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.edit_list:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.edit_list:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}
+
+
+::-webkit-input-placeholder {color:#999999;}
+::-moz-placeholder          {color:#999999;}/* Firefox 19+ */
+:-moz-placeholder           {color:#999999;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#999999;}

@@ -1,0 +1,229 @@
+.wrapper {
+    padding: 12px 0 0 16px;
+    color: #595959;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h3 {
+    position: relative;
+    top: 5px;
+    left: 15px;
+    -webkit-margin-after: 6px;
+}
+.clear {
+    display: block;
+    clear: both;
+    width: 1900px;
+    height: 1px;
+}
+
+#person {
+    background-image: url('../img/person.png');
+    position: relative;
+    width: 25px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 17px;
+    border-radius: 3px;
+    top: 25px;
+    left: -1px;
+}
+
+.board {
+    display: inline-block;
+    width: 222px;
+    height: 80.5px;
+    border-radius: 3px;
+    background: #0071b3;
+    margin: 10px 16px 8px 0;
+    color: white;
+    font-weight: bolder;
+    font-size: 17px;
+    padding: 8px 38px 8px 10px;
+    word-wrap: break-word;
+}
+.board:hover {
+    background: #006199;
+}
+
+#new_board {
+    width: 270px;
+    height: 56px;
+    border-radius: 3px;
+    font-size: 14px;
+    background: #E2E4E6;
+    margin: 10px 16px 0 0;
+    text-align: center;
+    padding-top: 40px;
+    color: #8c8c8c;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+#new_board:hover {
+    background: #d9d9d9;
+}
+#new_board_vis {
+    width: 270px;
+    height: 56px;
+    border-radius: 3px;
+    font-size: 14px;
+    background: #E2E4E6;
+    margin: 10px 10px 0 0;
+    text-align: center;
+    padding-top: 40px;
+    color: #8c8c8c;
+}
+
+.delete {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: absolute;
+    margin: -41px 236px;
+    width: 30px;
+    height: 29px;
+    background: #0071b3;
+    background-image: url('../img/delete.png');
+    background-repeat: no-repeat;
+    background-position: -7px -7px;
+    background-size: 45px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.delete:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.delete:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+#enter_name {
+    position: relative;
+    top: -27px;
+    left: 35px;
+    box-shadow: 1px 1px 0px #efefef;
+    border-radius: 5px;
+	background: #fafaf5;
+    padding-left: 2px
+}
+#enter_name:focus {
+	box-shadow: 0px 0px 7px #007eff;
+    outline: none;
+    background:linear-gradient(white, #E9E9E9);
+}
+
+#create {
+    width: 70px;
+    height: 30px;
+    position: relative;
+    color: white;
+    font-weight: bolder;
+    font-size: 15px;
+    top: 12px;
+    right: 92px;
+    outline: none;
+    border: 1px solid #4a9201;
+    background: linear-gradient(#5eba02, #69cf02, #5eba02);
+    box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+    border-radius: 5px;
+    box-shadow:
+        0 1px rgba(255,255,255,.2) inset,
+        0 2px 4px rgba(0,1,6,.5),
+        0 0 1px 1px rgba(0,1,6,.2);
+}
+#create:hover {
+    background: linear-gradient(#69cf02, #5eba02, #69cf02);
+}
+#create:active{
+  border-color: rgba(177,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+.edit {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: absolute;
+    margin: -97px 236px;
+    width: 30px;
+    height: 30px;
+    background: #0071b3;
+    background-image: url('../img/edit.png');
+    background-repeat: no-repeat;
+    background-position: -5px -6px;
+    background-size: 41px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.edit:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.edit:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.5px);
+    opacity: 1;
+}
+.qq {
+    background: black;
+    width: 100px;
+    height: 100px;
+}
+
+.edit_form{
+    display: none;
+}
+
+.input_new_name {
+    outline: none;
+    resize: none;
+    position: absolute;
+    margin: -97px 4px;
+    font-size: 14.5px;
+    border-radius: 4px;
+    padding: 5px 40px 2px 6px;
+    height: 72px;
+    width: 180px;
+    box-shadow: inset 0px 0px 7px #666666;
+}
+.input_new_name:focus {
+    box-shadow: inset 0px 0px 7px #000000;
+}
+
+.confirm {
+    border-radius: 8px;
+    border: 0px;
+    position: absolute;
+    margin: -51px 193px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    background-image: url('../img/confirm.png');
+    background-repeat: no-repeat;
+    background-position: 3px 3px;
+    background-size: 25px;
+    opacity: 0.75;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.confirm:hover {
+    opacity: 0.9;
+}
+.confirm:active {
+    opacity: 1;
+    transform: translate(1px, 1px)
+}

@@ -1,0 +1,303 @@
+#header {
+    width: 100%;
+    height: 40px;
+    background: #026AA7;
+    color: #7fb2d1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.title {
+    position: absolute;
+    left: 44.5%;
+    top: 5px;
+    font-size: 24px;
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    font-style: italic;
+    background-image: url('./img/trello-logo-white.svg');
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 82px;
+    border-radius: 3px;
+    opacity: 0.5;
+}
+.title:hover {
+    opacity: 0.8;
+}
+.boards_btn {
+    display: block;
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bolder;
+    width: 63.5px;
+    height: 23px;
+    background: #4590bc;
+    background-image: url('./img/logo.png');
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 16px;
+    border-radius: 3px;
+    top:5px;
+    left:5px;
+    text-align: center;
+    padding-top: 7px;
+    padding-left: 26px;
+    cursor: pointer;
+}
+
+.boards_btn:hover, .user:hover, .information:hover, .notifications:hover { background-color: #5c9ec4}
+
+.user {
+    display: inline-block;
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bolder;
+    min-width: 100px;
+    height: 23px;
+    background: #4590bc;
+    border-radius: 3px;
+    top:5px;
+    right:5px;
+    text-align: center;
+    padding: 7px 8px 0;
+    margin: 0 79px;
+    cursor: pointer;
+}
+#information {
+    display: inline-block;
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    min-width: 30px;
+    height: 26px;
+    background: #4590bc;
+    background-image: url('./img/info.png');
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 16px;
+    border-radius: 3px;
+    top:5px;
+    right:5px;
+    text-align: center;
+    padding-top: 4px;
+    margin: 0 41px;
+    cursor: pointer;
+}
+#notifications {
+    display: inline-block;
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    min-width: 30px;
+    height: 26px;
+    background: #4590bc;
+    background-image: url('./img/notifications.png');
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 16px;
+    border-radius: 3px;
+    top:5px;
+    right:8px;
+    text-align: center;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+#show_info {
+    display: none;
+    width: 280px;
+    height: 320px;
+    position: absolute;
+    right: 6px;
+    top: 42px;
+    box-shadow: 0 0 6px darkgrey;
+    border-radius: 2px;
+    background: white;
+    border-bottom: 1px solid #D6DADC;
+    color: #8c8c8c;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 10px;
+    z-index: 100;
+}
+#info_header {
+    display: block;
+    height: 16px;
+    padding: 10px;
+    border-bottom: 1px solid gainsboro;
+}
+#close_info {
+    background-image: url("./img/close_info.png");
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    border: none;
+    background-position: -1px;
+    background-color: white;
+    top: 12px;
+    right: 12px;
+    opacity: 0.5;
+    outline: none;
+}
+#close_info:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+.image_info {
+    background-image: url("./img/image_on_info.png");
+    background-repeat: no-repeat;
+    width: 280px;
+    height: 140px;
+    background-size: 280px;
+    border-radius: 3px;
+    margin: 7px 0 8px;
+}
+h3 {
+    margin: 0px 11px;
+    color: #444;
+}
+.info_content:hover {
+    cursor: pointer;
+    background-color: #e4e6e7;
+    border-radius: 5px;
+    height: 193px;
+}
+
+#show_notif {
+    width: 430px;
+    height: 122px;
+    position: absolute;
+    right: 6px;
+    top: 42px;
+    box-shadow: 0 0 6px darkgrey;
+    border-radius: 2px;
+    background: #EDEFF0;
+    border-bottom: 1px solid #D6DADC;
+    color: #8c8c8c;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 10px;
+    z-index: 100;
+}
+#close_notif {
+    background-image: url("./img/close_info.png");
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    border: none;
+    background-position: -1px;
+    background-color: #EDEFF0;
+    top: 12px;
+    right: 12px;
+    opacity: 0.5;
+    outline: none;
+    cursor: pointer;
+}
+
+#notif_content {
+    width: 429px;
+    height: 66px;
+    border: 1px dashed #c8ccd0;
+    margin: 7px 0;
+    background: #e2e4e6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#show_user {
+    display: none;
+    width: 280px;
+    height: 298px;
+    position: absolute;
+    right: 6px;
+    top: 42px;
+    box-shadow: 0 0 6px darkgrey;
+    border-radius: 2px;
+    background: white;
+    border-bottom: 1px solid #D6DADC;
+    color: #8c8c8c;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 10px;
+    z-index: 100;
+}
+ul {
+    text-align: left;
+    padding: 0;
+    font-weight: 600;
+    color: #4d4d4d;
+    line-height: 30px;
+    margin: 8px 0px;
+}
+li {
+    list-style-type: none;
+    cursor: pointer;
+}
+li:hover {
+    background: #0281ca;
+    color: #ffffff
+}
+.user_menu {
+    height: 193px;
+}
+hr {
+    color: #D6DADC;
+    background-color: #D6DADC;
+    border: 0px none;
+    height: 1px;
+    clear: both;
+}
+a {
+    text-decoration: none;
+    color: #4d4d4d;
+}
+li {
+    width: 281px;
+    margin: 0 -10px;
+    padding: 0 10px;
+}
+#search {
+    border: none;
+    background: #4590bc;
+    position: absolute;
+    top: 5px;
+    left: 103px;
+    font-size: 16px;
+    color: white;
+    padding: 6px 32px 5.5px 7px;
+    width: 141px;
+    border-radius: 3px;
+    outline: none;
+}
+#search:focus {
+    color: #000;
+    background-color: #fff;
+}
+#search_btn {
+    background-image: url('./img/search.png');
+    background-repeat: no-repeat;
+    background-position: 7px;
+    background-size: 18px;
+    width: 32px;
+    height: 29px;
+    position: absolute;
+    left: 251px;
+    top: 5px;
+}
+#search_btn:hover {
+    cursor: pointer;
+}
+
+#search:focus + #search_btn {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}

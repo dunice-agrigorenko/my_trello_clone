@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="page">
+        <div id="board_name">{{title}}</div>
+
+        <!--Отрисовка листов-->
+        <div class="list" *ngFor="let list of lists">
+            <p (click)="edit_form(list.id, list.title)" id={{list.id+1}}>{{list.title}}</p>
+
+            <div style="display: none" id={{list.id}}>
+                <!--Редактирование листа-->
+                <button class="edit_list" (click)="edit_list(editList.value, list.id)" title="Confirm"></button>
+                <input #editList style="padding: 4px; border: none; border-radius: 4px; box-shadow: inset 0 0 5px grey;"
+                                 (keydown)="EditListOnEnter($event, editList.value, list.id)">
+            </div>
+            <!--Удаление листа-->
+            <button class="delete_list" (click)="delete_list(list.id)" title="Delete"></button>
+
+            <!--Отрисовка карт-->
+            <cards [list]="list"></cards>
+
+        </div>
+
+        <!--Форма для создания нового листа-->
+        <div class="form" #createList (click)="new_list_form()" [style.display]="visibility==false?'inline-block':'none'">Add a list...</div>
+        <div id="create_list" #createListForm [style.display]="visibility==true?'inline-block':'none'">
+            <input id="new_list_name" #newListName placeholder="Add a list..." (keydown)="NewListOnEnter($event, newListName.value)">
+            <button id="new_list_create_btn" (click)="add_new_list(newListName.value)">Add</button>
+        </div>
+    </div>
+</div>
