@@ -1,0 +1,18 @@
+<a routerLink="/board/{{board.id}}">
+    <div class="board">{{board.title}}</div>
+</a>
+<!---->
+
+<!--кнопка удаления доски-->
+<button class="delete" (click)="delete_board(board.id)" title="Delete"></button>
+
+<!--кнопка редактирования названия доски-->
+<button class="edit" (click)="show = !show" title="Edit"></button>
+
+<div class="edit_form" *ngIf="show">
+    <!--Форма для изменения названия доски-->
+    <textarea class="input_new_name" [(ngModel)]="board.title" (keydown)="EditBoardOnEnter($event, board.id)">
+            </textarea>
+
+    <!--кнопка "принять изменения" после правки названия доски-->
+    <button class="confirm" (click)="confirm(board.id)" title="Confirm"></button>

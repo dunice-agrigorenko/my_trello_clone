@@ -15,6 +15,7 @@ import { CommonModule } from "@angular/common";
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { CardEditing } from './card/modal.component';
 import { DragulaModule } from 'ng2-dragula';
+import { BoardEntry } from './board/board-entry.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DragulaModule } from 'ng2-dragula';
     Autorization,
     CardsDisplay,
     Comment,
+    BoardEntry,
     ListName,
     CardEditing,
   ],

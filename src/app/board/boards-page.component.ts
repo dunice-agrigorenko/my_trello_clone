@@ -26,7 +26,7 @@ export class BoardsPage implements OnInit {
   lists = LISTS;
   visibility_newBoard: boolean = true;
   visibility_newForm: boolean = false;
-
+  edited_name: String;
 
   constructor(private router: Router) { }
 
@@ -70,6 +70,10 @@ export class BoardsPage implements OnInit {
   }
   //------------------------------------------------------------------------------------------
 
+  boardName_change(value) {
+    this.boards_array = value
+  }
+
   NewBoardOnEnter(event, Name) { //Создание борда при нажатии ENTER
     if (event.keyCode == 13) {
       this.create_board(Name);
@@ -78,9 +82,9 @@ export class BoardsPage implements OnInit {
       this.old_board();
     }
   }
-  EditBoardOnEnter(event, Name, ID) { //Создание борда при нажатии ENTER
+  EditBoardOnEnter(event, ID) { //Создание борда при нажатии ENTER
     if (event.keyCode == 13) {
-      this.confirm(ID, Name);
+      this.confirm(ID);
     } else if (event.keyCode == 27) {
       this.cancel_editing(ID)
     }
@@ -107,12 +111,12 @@ export class BoardsPage implements OnInit {
     (<HTMLInputElement>document.getElementById(id + 1)).value = title;
   }
 
-  confirm(id, title) { /* Принятие изменений, при редактировании названия доски */
+  confirm(id) { /* Принятие изменений, при редактировании названия доски */
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
-    if (title.trim() != "") {
+    if (this.edited_name.trim() != "") {
       for (var i = 0; i < dataArray.length; i++) {
         if (dataArray[i].id == id) {
-          dataArray[i].title = title.trim();
+          dataArray[i].title = this.edited_name.trim();
           break;
         }
       }
@@ -120,7 +124,7 @@ export class BoardsPage implements OnInit {
     var serialObj = JSON.stringify(dataArray);
     localStorage.setItem("Boards", serialObj);
     this.boards_array = dataArray;
-    document.getElementById(id).style.display = "none";
+    // document.getElementById(id).style.display = "none";
   }
 
   cancel_editing(id) {

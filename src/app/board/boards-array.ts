@@ -1,5 +1,3 @@
-import { Lists } from '../list/list';
-
-export interface BoardsArray extends Lists {
-    lists: Array<Lists>
+export interface BoardsArray  {
+    boards: Array<BoardsArray>
 }
