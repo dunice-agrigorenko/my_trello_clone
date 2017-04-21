@@ -8,9 +8,12 @@ let LISTS: Lists[] = [];
     selector: 'board-entry',
     templateUrl: './board-entry.component.html',
     styleUrls: ['./board-entry.component.css'],
+    host: {
+        '(document:click)': 'outClick($event)',
+    },
 })
 
-export class BoardEntry implements OnInit {
+export class BoardEntry {
     @Input() board;
     @Output() confirmChanges = new EventEmitter();
 
@@ -20,8 +23,10 @@ export class BoardEntry implements OnInit {
     visibility_newBoard: boolean = true;
     visibility_newForm: boolean = false;
 
-    ngOnInit() {
+    public elementRef;
 
+    constructor(myElement: ElementRef) {
+        this.elementRef = myElement;
     }
 
     EditBoardOnEnter(event, ID) { //Создание борда при нажатии ENTER
@@ -63,5 +68,19 @@ export class BoardEntry implements OnInit {
         localStorage.setItem("Boards", serialObj);
         this.boards_array = dataArray;
         this.show = false;
+    }
+    outClick(event) {
+        var clickedComponent = event.target;
+        var inside = false;
+        do {
+            if (clickedComponent === this.elementRef.nativeElement) {
+                inside = true;
+            }
+            clickedComponent = clickedComponent.parentNode;
+        } while (clickedComponent);
+        if (!inside) {
+            this.show = false;
+            console.log("Q")
+        }
     }
 }
