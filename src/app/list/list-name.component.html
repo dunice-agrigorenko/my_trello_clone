@@ -1,0 +1,8 @@
+<div (click)="edit_list()" [style.display]="visibility==false?'inline-block':'none'">{{list.title}}</div>
+<input [(ngModel)]="value" #editList style="padding: 4px; border: none; border-radius: 4px; box-shadow: inset 0 0 5px grey;"
+    [style.display]="visibility==true?'inline-block':'none'" (keydown)="EditListOnEnter($event, list.id)">
+
+<!--Удаление листа-->
+<button class="delete_list" (click)="delete_list(list.id)" title="Delete"></button>
+
+<cards [list]="list"></cards>

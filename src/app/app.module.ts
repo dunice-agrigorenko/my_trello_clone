@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { DragulaModule } from 'ng2-dragula';
+import { CommonModule } from "@angular/common";
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { AppComponent } from './app.component';
 import { BoardsPage } from './board/boards-page.component';
 import { UserInfo } from './user/user-info.component';
@@ -11,11 +14,9 @@ import { Autorization } from './autorization/autorization.component';
 import { CardsDisplay } from './card/cards-page.component';
 import { ListName } from './list/list-name.component';
 import { Comment } from './card/comments/comment.component'
-import { CommonModule } from "@angular/common";
-import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { CardEditing } from './card/modal.component';
-import { DragulaModule } from 'ng2-dragula';
-import { BoardEntry } from './board/board-entry.component';
+import { BoardEntry } from './board-entry/board-entry.component';
+import { NotFound } from './not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BoardEntry } from './board/board-entry.component';
     Autorization,
     CardsDisplay,
     Comment,
+    NotFound,
     BoardEntry,
     ListName,
     CardEditing,
@@ -55,14 +57,14 @@ import { BoardEntry } from './board/board-entry.component';
         redirectTo: '/boards',
         pathMatch: 'full'
       },
-      {
-        path: 'autorization',
-        component: Autorization
-      },
       // {
-      //   path: '**',
-      //   component: NotFound
-      // }
+      //   path: 'autorization',
+      //   component: Autorization
+      // },
+      {
+        path: '**',
+        component: NotFound
+      }
     ])
   ],
   providers: [],

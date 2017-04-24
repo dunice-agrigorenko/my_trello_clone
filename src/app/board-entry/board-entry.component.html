@@ -7,12 +7,14 @@
 <button class="delete" (click)="delete_board(board.id)" title="Delete"></button>
 
 <!--кнопка редактирования названия доски-->
-<button class="edit" (click)="show = !show" title="Edit"></button>
+<button class="edit" (click)="show = !show; board_title=board.title" title="Edit"></button>
 
 <div class="edit_form" *ngIf="show">
     <!--Форма для изменения названия доски-->
-    <textarea class="input_new_name" [(ngModel)]="board.title" (keydown)="EditBoardOnEnter($event, board.id)">
-            </textarea>
+    <textarea class="input_new_name" [(ngModel)]="board_title" (keydown)="EditBoardOnEnter($event, board.id)">
+    </textarea>
 
     <!--кнопка "принять изменения" после правки названия доски-->
     <button class="confirm" (click)="confirm(board.id)" title="Confirm"></button>
+</div>
+<router-outlet></router-outlet>

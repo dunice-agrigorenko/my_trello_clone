@@ -116,32 +116,6 @@ p {
   box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
 }
 
-.delete_list {
-    border-radius: 8px;
-    border: 0px;
-    display: block;
-    position: relative;
-    margin: -15px 236px;
-    bottom: 10px;
-    width: 25px;
-    height: 25px;
-    background-image: url('../img/delete.png');
-    background-repeat: no-repeat;
-    background-size: 25px;
-    opacity: 0.7;
-    border-radius: 3px;
-    cursor: pointer;
-    outline: none;
-}
-.delete_list:hover {
-    box-shadow: 1px 1px 13px black;
-    opacity: 0.95;
-}
-.delete_list:active {
-    box-shadow: 1px 1px 7px black;
-    transform: translateY(0.3px);
-    opacity: 1;
-}
 .delete_card {
     border-radius: 8px;
     border: 0px;

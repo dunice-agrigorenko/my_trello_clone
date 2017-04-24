@@ -5,22 +5,15 @@
         <!--Отрисовка листов-->
         <div class="list" *ngFor="let list of lists">
             <p>
-                <list-name [list]="list" [boardId]="boardId"></list-name>
+                <list-name [list]="list" [boardId]="boardId" (deleteList)="delete_list($event)"></list-name>
             </p>
-            
-            <!--Удаление листа-->
-            <button class="delete_list" (click)="delete_list(list.id)" title="Delete"></button>
-
-            <!--Отрисовка карт-->
-            <cards [list]="list"></cards>
-
         </div>
 
         <!--Форма для создания нового листа-->
         <div class="form" #createList (click)="new_list_form()" [style.display]="visibility==false?'inline-block':'none'">Add a list...</div>
         <div id="create_list" #createListForm [style.display]="visibility==true?'inline-block':'none'">
-            <input id="new_list_name" #newListName placeholder="Add a list..." (keydown)="NewListOnEnter($event, newListName.value)">
-            <button id="new_list_create_btn" (click)="add_new_list(newListName.value)">Add</button>
+            <input id="new_list_name" [(ngModel)]="new_list_name" placeholder="Add a list..." (keydown)="NewListOnEnter($event)">
+            <button id="new_list_create_btn" (click)="add_new_list()">Add</button>
         </div>
     </div>
 </div>

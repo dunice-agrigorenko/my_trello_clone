@@ -30,19 +30,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem("User"));
-    // if (Current_user !== null) {
-    //   this.USER_NAME = Current_user[0].name;
-    // } else {
-    //   this.router.navigate(['/autorization']);
-    // }
     if (user != null)
-    this.USER_NAME = user[0].name;
+      this.USER_NAME = user[0].name;
   }
-  log_out() {
-    // var Current_user = JSON.parse(localStorage.getItem("Current_user"));
-    // this.close_window();
-    // localStorage.removeItem("Current_user");
-  }
+
   //---------------------------------------------------------------- отображения окна информации
   show_info() {
     this.visibility_info = !this.visibility_info;
@@ -76,8 +67,8 @@ export class AppComponent implements OnInit {
         break;
     }
   }
-  
-//Проверка клика вне элемента new_board (взято с http://4dev.tech/2016/03/angular2-tutorial-detecting-clicks-outside-the-component/)
+
+  //Проверка клика вне элемента new_board (взято с http://4dev.tech/2016/03/angular2-tutorial-detecting-clicks-outside-the-component/)
   handleClick(event) {
     var clickedComponent = event.target;
     var inside;

@@ -3,9 +3,8 @@
         <div class="modal-header">
             <button type="button" class="close" (click)="close()">&times;</button>
             <div class="title" (click)="change_card_name()" [style.display]="change_card_name_val==true?'block':'none'">{{title}}</div>
-            <input #newCardName class="change_card_name" value={{title}} 
-                   [style.display]="change_card_name_val==false?'block':'none'"
-                   (keydown)="edit_card_name($event, newCardName.value)">
+            <input [(ngModel)]="newCardName" class="change_card_name" [style.display]="change_card_name_val==false?'block':'none'"
+                (keydown)="edit_card_name($event)">
         </div>
         <div class="modal-body">
             <div class="description-form">
@@ -17,15 +16,15 @@
                 </p></pre>
 
                 <div class="description_form" [style.display]="visibility==true?'block':'none'">
-                    <textarea class="new_comment descript_change" #descript value={{description}}></textarea>
-                    <button class="confirm" (click)="edit_descript(descript.value)">Save</button>
+                    <textarea class="new_comment descript_change" [(ngModel)]="newDescription"></textarea>
+                    <button class="confirm" (click)="edit_descript()">Save</button>
                 </div>
             </div>
 
             <div class="comment_form">
                 Add comment:<br>
-                <textarea class="new_comment" placeholder="Write a comment..." #newComment></textarea>
-                <button class="confirm" (click)="add_comment(newComment.value)">Send</button>
+                <textarea class="new_comment" placeholder="Write a comment..." [(ngModel)]="newComment"></textarea>
+                <button class="confirm" (click)="add_comment()">Send</button>
 
                 <div class="comment_list">Comments:
                     <p *ngFor="let c of comment"><span style="font-weight: bold">Comment:</span>

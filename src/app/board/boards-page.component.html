@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-    <div id="person"></div>
+    <div class="person"></div>
     <h3>
         {{title}}
     </h3>
@@ -11,14 +11,13 @@
     <div *ngFor="let board of boards_array">
         <board-entry [board]="board" (confirmChanges)="boardName_change($event)"></board-entry>
     </div>
+
     <!--Блок, при нажатии на который появляется форма ввода-->
-    <div id="new_board" [style.display]="visibility_newBoard==true?'block':'none'" (click)="new_board()" #newBoard>{{newBoardTitle}}</div>
+    <div id="new_board" [style.display]="visibility_newBoard==true?'block':'none'" (click)="new_board()">{{newBoardTitle}}</div>
 
     <!--Форма ввода названия для создания новой доски-->
-    <div id="new_board_vis" [style.display]="visibility_newForm==true?'block':'none'" #newForm>
-        <input type="text" placeholder="Enter board name" id="enter_name" #entername (keydown)="NewBoardOnEnter($event, entername.value)">
-        <button id="create" (click)="create_board(entername.value)" (click)="old_board()">Create</button>
+    <div id="new_board_vis" [style.display]="visibility_newBoard==false?'block':'none'">
+        <input placeholder="Enter board name" class="enter_name" [(ngModel)]="new_board_name" (keydown)="NewBoardOnEnter($event)">
+        <button id="create" (click)="create_board()" (click)="old_board()">Create</button>
     </div>
-
 </div>
-<router-outlet></router-outlet>

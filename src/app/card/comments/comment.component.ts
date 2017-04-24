@@ -12,22 +12,11 @@ export class Comment {
     @Input() listId;
     @Input() cardId;
     @Output() deleteComment = new EventEmitter();
-
-    @ViewChild("editComment") editComment: ElementRef;
+    comment_value: string;
 
     visibility: boolean = false;
 
-    EditListOnEnter(event, Name, ID) { /* Редактирование листа при нажатии ENTER */
-        switch (event.keyCode) {
-            case 13:
-                this.confirm(Name, ID);
-                break;
-            case 27:
-                this.visibility = !this.visibility;
-        }
-    }/****************************************************************************/
-
-    confirm(value, id) { /* Редактирование листа */
+    confirm(value, id) { /******************** Редактирование листа ********************/
         this.visibility = !this.visibility;
         let dataArray = JSON.parse(localStorage.getItem("Boards"));
         if (value.trim() !== "")
@@ -61,9 +50,9 @@ export class Comment {
 
     edit_comment() { /* Отображение поля для редактирования */
         this.visibility = !this.visibility;
-    }
+    }/*******************************************************/
 
-    save(new_name) { /* Сохранение в хранилище отредактированого комментария */
+    save() { /***** Сохранение в хранилище отредактированого комментария *****/
         this.visibility = !this.visibility;
         var dataArray = JSON.parse(localStorage.getItem("Boards"));
         for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
@@ -72,7 +61,7 @@ export class Comment {
                     if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
                         for (let k = 0; k < dataArray[this.boardId].lists[j].cards[i].comment.length; k++) {
                             if (dataArray[this.boardId].lists[j].cards[i].comment[k].id == this.comment.id) {
-                                dataArray[this.boardId].lists[j].cards[i].comment[k].title = new_name
+                                dataArray[this.boardId].lists[j].cards[i].comment[k].title = this.comment_value
                                 var serialObj = JSON.stringify(dataArray);
                                 localStorage.setItem("Boards", serialObj);
                                 this.comment = dataArray[this.boardId].lists[j].cards[i].comment[k];

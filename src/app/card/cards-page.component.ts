@@ -6,6 +6,8 @@ import { CardEditing } from './modal.component';
 import { DialogService } from "ng2-bootstrap-modal";
 import { DragulaModule } from 'ng2-dragula';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'cards',
@@ -18,44 +20,61 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 export class CardsDisplay {
     @Input() list: Lists;
-    @ViewChild("cardName") cardName: ElementRef;
+    new_card_name: string;
     @ViewChild("newCard") newCard: ElementRef;
     @ViewChild("newCardForm") newCardForm: ElementRef;
     visibility: boolean = false;
 
-    boardId = 0;
+    boardId = 0;//?
 
-    constructor(private dialogService: DialogService, private dragulaService: DragulaService) {
-        /*************************** Код ниже нужен для драг энд дропа TODO *******************************/
+    private id: number;
+    private subscription: Subscription;
+
+    constructor(
+        private dialogService: DialogService,
+        private dragulaService: DragulaService,
+        private route: ActivatedRoute,
+        private router: Router) {
+
+        this.subscription = route.params.subscribe(params => this.id = params['id']);
+        let dataArray = JSON.parse(localStorage.getItem("Boards"));
+        for (let i = 0; i < dataArray.length; i++) {
+            if (dataArray[i].id == this.id) {
+                this.boardId = i;
+                break;
+            }
+        }
+
+        /***************************** Код ниже нужен для драг энд дропа TODO *********************************/
         dragulaService.drop.subscribe((value) => {
             this.onDropModel(value);
         });
+
     }
+
     private onDropModel(args) {
         let [el, target, source] = args;
-        console.log(args)
-        // do something else
-    }
-    /*************************************************************************************************/
+        console.log(args);
+    }/*****************************************************************************************************/
 
 
     showAlert(title, cardid, listid) { /* Вызов модального окна при клике на карту */
         this.dialogService.addDialog(CardEditing,
             { title: title, cardId: cardid, listId: listid, boardId: this.boardId },
-            { closeByClickingOutside: true, backdropColor: 'rgba(0, 0, 0, 0.5)' });
+            { closeByClickingOutside: true, backdropColor: 'rgba(0, 0, 0, 0.55)' });
     }
 
 
-    add_card(title, id) { /* Добавление карты */
+    add_card(id) { /* Добавление карты */
         var dataArray = JSON.parse(localStorage.getItem("Boards"));
-        this.visibility = !this.visibility
+        this.visibility = !this.visibility;
         var card = {
             id: +new Date(),
-            title: title,
+            title: this.new_card_name,
             comment: [],
             description: "",
         };
-        if (title.trim() !== "") {
+        if (this.new_card_name.trim() !== "") {
             for (let i = 0; i <= dataArray[this.boardId].lists.length; i++) {
                 if (dataArray[this.boardId].lists[i].id === id) {
                     dataArray[this.boardId].lists[i].cards[dataArray[this.boardId].lists[i].cards.length] = card;
@@ -66,11 +85,12 @@ export class CardsDisplay {
                 }
             }
         }
+        this.new_card_name = "";
     }
 
-    delete_card(id) {
+    delete_card(id) {/**** Удаление нужной нам карты из хранилища и удаление её со страницы ****/
         let dataArray = JSON.parse(localStorage.getItem("Boards"));
-        /******* Удаление нужной нам карты из хранилища и удаление её со страницы ********/
+
         for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
             for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
                 if (dataArray[this.boardId].lists[j].cards[i].id == id) {
@@ -85,19 +105,18 @@ export class CardsDisplay {
     }
 
     new_card_form_vis() { /* Отображение формы для ввода новой карты, при клике на соотв. эл-т */
-        this.visibility = !this.visibility
+        this.visibility = !this.visibility;
     }
 
-    NewCardOnEnter(event, Name, ID) { /* Создание борда при нажатии ENTER */
+    NewCardOnEnter(event, ID) { /* Создание борда при нажатии ENTER */
         switch (event.keyCode) {
             case 13:
                 this.visibility = true;
-                this.add_card(Name, ID);
-                this.cardName.nativeElement.value = "";
+                this.add_card(ID);
                 break;
             case 27:
                 this.visibility = !this.visibility;
-                this.cardName.nativeElement.value = "";
+                this.new_card_name = "";
                 break;
         }
     }
@@ -108,6 +127,7 @@ export class CardsDisplay {
         do {
             switch (clickedComponent) {
                 case this.newCard.nativeElement: {
+                    console.log(this.newCard.nativeElement.parentNode)
                     inside = true;
                 }
                 case this.newCardForm.nativeElement: {
@@ -118,7 +138,7 @@ export class CardsDisplay {
         } while (clickedComponent);
         if (!inside) {
             this.visibility = false;
-            this.cardName.nativeElement.value = "";
+            this.new_card_name = "";
         }
     }
 }

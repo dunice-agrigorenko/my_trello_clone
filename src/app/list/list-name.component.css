@@ -1,0 +1,27 @@
+div { width: 215px; }
+.delete_list {
+    border-radius: 8px;
+    border: 0px;
+    display: block;
+    position: relative;
+    margin: -15px 236px;
+    bottom: 10px;
+    width: 25px;
+    height: 25px;
+    background-image: url('../img/delete.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    opacity: 0.7;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+.delete_list:hover {
+    box-shadow: 1px 1px 13px black;
+    opacity: 0.95;
+}
+.delete_list:active {
+    box-shadow: 1px 1px 7px black;
+    transform: translateY(0.3px);
+    opacity: 1;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { AppComponent } from '../app.component'
 import { BoardsArray } from './boards-array';
 import { Lists } from '../list/list';
@@ -16,37 +16,37 @@ let LISTS: Lists[] = []
 })
 
 export class BoardsPage implements OnInit {
-  @ViewChild('newForm') newform: ElementRef;
-  @ViewChild('newBoard') newboard: ElementRef;
-  @ViewChild('entername') entername: ElementRef;
 
-  newBoardTitle = 'Create new board...';
-  title = 'Boards page';
-  boards_array: Array<BoardsArray> = [];
+  newBoardTitle = "Create new board...";
+  title = "Boards page";
   lists = LISTS;
+  boards_array: Array<BoardsArray> = [];
   visibility_newBoard: boolean = true;
-  visibility_newForm: boolean = false;
   edited_name: String;
+  new_board_name: string = "";
 
-  constructor(private router: Router) { }
+  public elementRef;
+
+  constructor(private router: Router, myElement: ElementRef) {
+    this.elementRef = myElement;
+  }
 
   ngOnInit() { //Прорисовка бордов при инициализации страницы
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     this.boards_array = dataArray;
   }
 
-  create_board(Name) { //Функция создания борда
+  create_board() { //Функция создания борда
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     if (dataArray == null) { // Если объект localStorage отсутствует, то создаем пустой объект
       dataArray = [];
     }
-    Name.trim(); //обрезаем пробелы
-    if (Name == '') {
+    if (this.new_board_name.trim() == '') {
       return;
     }
     var obj = {
       id: +new Date(),
-      title: Name,
+      title: this.new_board_name,
       lists: this.lists,
     };
     dataArray[dataArray.length] = obj;
@@ -57,16 +57,12 @@ export class BoardsPage implements OnInit {
 
   //------------------------------------------------------------------------------------------
   new_board() { //Отрисовка формы для создания нового борда с формой ввода
-    this.visibility_newForm = !this.visibility_newForm;
     this.visibility_newBoard = !this.visibility_newBoard;
-    this.entername.nativeElement.value = '';
+    this.new_board_name = '';
   }
 
   old_board() { //Отрисовка формы для создания нового борда без формы ввода
-    if (this.visibility_newForm == true) {
-      this.visibility_newForm = !this.visibility_newForm;
-      this.visibility_newBoard = !this.visibility_newBoard;
-    }
+    this.visibility_newBoard = !this.visibility_newBoard;
   }
   //------------------------------------------------------------------------------------------
 
@@ -74,84 +70,27 @@ export class BoardsPage implements OnInit {
     this.boards_array = value
   }
 
-  NewBoardOnEnter(event, Name) { //Создание борда при нажатии ENTER
+  NewBoardOnEnter(event) { //Создание борда при нажатии ENTER
     if (event.keyCode == 13) {
-      this.create_board(Name);
+      this.create_board();
       this.old_board();
     } else if (event.keyCode == 27) {
       this.old_board();
     }
   }
-  EditBoardOnEnter(event, ID) { //Создание борда при нажатии ENTER
-    if (event.keyCode == 13) {
-      this.confirm(ID);
-    } else if (event.keyCode == 27) {
-      this.cancel_editing(ID)
-    }
-  }
 
-  delete_board(id) { //удаление отдельного борда
-    var dataArray = JSON.parse(localStorage.getItem("Boards"));
-
-    for (var i = 0; i < dataArray.length; i++) {
-      if (dataArray[i].id == id) {
-        dataArray.splice(i, 1);
-        break;
-      }
-    }
-
-    var serialObj = JSON.stringify(dataArray);
-    localStorage.setItem("Boards", serialObj);
-    this.boards_array = dataArray;
-  }
-
-  edit_board(id, title) { /* Форма для редактирования имени доски */
-    document.getElementById(id).style.display = "block";
-    document.getElementById(id + 1).focus();
-    (<HTMLInputElement>document.getElementById(id + 1)).value = title;
-  }
-
-  confirm(id) { /* Принятие изменений, при редактировании названия доски */
-    var dataArray = JSON.parse(localStorage.getItem("Boards"));
-    if (this.edited_name.trim() != "") {
-      for (var i = 0; i < dataArray.length; i++) {
-        if (dataArray[i].id == id) {
-          dataArray[i].title = this.edited_name.trim();
-          break;
-        }
-      }
-    }
-    var serialObj = JSON.stringify(dataArray);
-    localStorage.setItem("Boards", serialObj);
-    this.boards_array = dataArray;
-    // document.getElementById(id).style.display = "none";
-  }
-
-  cancel_editing(id) {
-    document.getElementById(id).style.display = "none";
-  }
-
-  //------------------------------------------------------------------------------------------------------ 
   //Проверка клика вне элемента new_board (взято с http://4dev.tech/2016/03/angular2-tutorial-detecting-clicks-outside-the-component/)
   outClick(event) {
     var clickedComponent = event.target;
     var inside = false;
     do {
-      switch (clickedComponent) {
-        case this.newboard.nativeElement: {
-          inside = true;
-          this.entername.nativeElement.focus();
-        }
-        case this.newform.nativeElement: {
-          inside = true;
-          this.entername.nativeElement.focus();
-        }
+      if (clickedComponent === this.elementRef.nativeElement) {
+        inside = true;
       }
       clickedComponent = clickedComponent.parentNode;
     } while (clickedComponent);
     if (!inside) {
-      this.old_board();
+      this.visibility_newBoard = true;
     }
-  }
-  //------------------------------------------------------------------------------------------------------
+  }//---------------------------------------------------------------------------------------------------------------------------------
 }

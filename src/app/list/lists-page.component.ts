@@ -17,29 +17,24 @@ var CARDS: Cards[] = [];
 })
 
 export class ListsDisplay implements OnInit, OnDestroy {
-  @ViewChild("newListName") newList: ElementRef;
   @ViewChild("createListForm") createListForm: ElementRef;
   @ViewChild("createList") createList: ElementRef;
-  @ViewChild("editList") editList: ElementRef;
   visibility: boolean = false;
   title = ''; /* название страницы */
   boardId = 0; /* № доски в localStorage */
   lists = []; /* Переменная в которую записываются листы */
   cards = CARDS;
+  new_list_name: string = "";
 
   private id: number;
   private subscription: Subscription;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.subscription = route.params.subscribe(params => this.id = params['id']);
   }
 
   ngOnInit() { /* При загрузке: */
     let dataArray = JSON.parse(localStorage.getItem("Boards"));
-    // let id = +this.route.snapshot.params['id']; //id страницы
 
     /************************ Смена имени страницы ************************/
     for (let i = 0; i < dataArray.length; i++) {
@@ -60,44 +55,32 @@ export class ListsDisplay implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  add_new_list(name) { /* Добавление нового листа */
+  add_new_list() { /* Добавление нового листа */
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     this.visibility = !this.visibility;
 
-    (<HTMLInputElement>document.getElementById("new_list_name")).value = "";
 
     var list = {
       id: +new Date(),
-      title: name,
+      title: this.new_list_name,
       cards: this.cards,
     };
 
     /************** Добавление новых листов в хранилище и отображение на странице ***************/
     for (let i = 0; i <= dataArray[this.boardId].lists.length; i++) {
-      if (name.trim() !== "") {
+      if (this.new_list_name.trim() !== "") {
         dataArray[this.boardId].lists[dataArray[this.boardId].lists.length] = list;
         var serialObj = JSON.stringify(dataArray);
         localStorage.setItem("Boards", serialObj);
         this.lists = dataArray[this.boardId].lists;
+        this.new_list_name = "";
         break;
       }
     }/*******************************************************************************************/
   }
 
-  delete_list(id) { /* Удаление листа */
-    let dataArray = JSON.parse(localStorage.getItem("Boards"));
-
-    /******* Удаление нужного нам листа из хранилища и удаление его со страницы ********/
-    for (let i = 0; i <= dataArray[this.boardId].lists.length; i++) {
-      if (dataArray[this.boardId].lists[i].id == id) {
-        dataArray[this.boardId].lists.splice(i, 1);
-        break;
-      }
-    }/**********************************************************************************/
-
-    var serialObj = JSON.stringify(dataArray);
-    localStorage.setItem("Boards", serialObj);
-    this.lists = dataArray[this.boardId].lists;
+  delete_list(value) {
+    this.lists = value
   }
 
   delete_card(listId, cardId) {
@@ -125,11 +108,11 @@ export class ListsDisplay implements OnInit, OnDestroy {
     switch (event.keyCode) {
       case 13:
         this.visibility = true;
-        this.add_new_list(Name);
+        this.add_new_list();
         break;
       case 27:
         this.visibility = !this.visibility;
-        this.newList.nativeElement.value = "";
+        this.new_list_name = "";
         break;
     }
   }
@@ -149,7 +132,7 @@ export class ListsDisplay implements OnInit, OnDestroy {
     } while (clickedComponent);
     if (!inside) {
       this.visibility = false;
-      this.newList.nativeElement.value = "";
+      this.new_list_name = "";
     }
   }
 }

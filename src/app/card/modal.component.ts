@@ -9,7 +9,7 @@ export interface AlertModel {
   cardId: number;
   title: string;
   comment: any;
-  description: String | number;
+  description: String;
 }
 
 @Component({
@@ -28,6 +28,9 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
   title;
   comment;
   description;
+  newComment: string;
+  newDescription: string;
+  newCardName: string;
 
   constructor(dialogService: DialogService) {
     super(dialogService);
@@ -46,11 +49,11 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
     }
   }
 
-  edit_card_name(event, Name) {
+  edit_card_name(event) {
     switch (event.keyCode) {
       case 13:
         this.change_card_name_val = true;
-        this.confirm_new_card_name(Name);
+        this.confirm_new_card_name(this.newCardName);
         break;
       case 27:
         this.change_card_name_val = !this.change_card_name_val;
@@ -72,29 +75,29 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
     }
   }
 
-  edit_descript(descript) { /* Редактирование описания */
+  edit_descript() { /* Редактирование описания */
     this.visibility = !this.visibility;
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
       for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
         if (dataArray[this.boardId].lists[j].cards[i].id == this.cardId) {
-          dataArray[this.boardId].lists[j].cards[i].description = descript;
+          dataArray[this.boardId].lists[j].cards[i].description = this.newDescription;
           var serialObj = JSON.stringify(dataArray);
           localStorage.setItem("Boards", serialObj);
-          this.description = descript;
+          this.description = this.newDescription;
           break;
         }
       }
     }
   }
 
-  add_comment(new_comment) { /* Добавление комментариев */
+  add_comment() { /* Добавление комментариев */
     var dataArray = JSON.parse(localStorage.getItem("Boards"));
     var comment = {
       id: +new Date,
-      title: new_comment,
+      title: this.newComment,
     }
-    if (new_comment.trim() !== "") {
+    if (this.newComment.trim() !== "") {
       for (let j = 0; j < dataArray[this.boardId].lists.length; j++) {
         if (dataArray[this.boardId].lists[j].id == this.listId) {
           for (let i = 0; i < dataArray[this.boardId].lists[j].cards.length; i++) {
@@ -110,6 +113,7 @@ export class CardEditing extends DialogComponent<AlertModel, null> implements Al
       }
     }
   }
+
   comment_delete(comment) {
     this.comment = comment
   }

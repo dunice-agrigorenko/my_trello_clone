@@ -1,14 +1,14 @@
-    <div class='container' [dragula] [dragulaModel]='card'>
-        <div class="card" (click)="showAlert(card.title, card.id, list.id)" *ngFor="let card of list.cards">{{card.title}}
-            <button class="delete_card" (click)="delete_card(card.id)" title="Delete"></button>
-            <!--Отрисовка карт-->
-        </div>
+<!--Отрисовка карт-->
+<div class='container' [dragula] [dragulaModel]='card'>
+    <div class="card" (click)="showAlert(card.title, card.id, list.id)" *ngFor="let card of list.cards">{{card.title}}
+        <button class="delete_card" (click)="delete_card(card.id)" title="Delete"></button>
     </div>
+</div>
 
-    <!--Форма для создания новой карточки-->
-    <div class="new_card_block" #newCard (click)="new_card_form_vis()" [style.display]="visibility==false?'block':'none'">Add a card...</div>
-    <div class="new_card_form" #newCardForm [style.display]="visibility==true?'block':'none'">
-        <textarea class="new_card_name" #cardName (keydown)="NewCardOnEnter($event, cardName.value, list.id)"></textarea>
+<!--Форма для создания новой карточки-->
+<div class="new_card_block" #newCard (click)="new_card_form_vis()" [style.display]="visibility==false?'block':'none'">Add a card...</div>
+<div class="new_card_form" #newCardForm [style.display]="visibility==true?'block':'none'">
+    <textarea class="new_card_name" [(ngModel)]="new_card_name" (keydown)="NewCardOnEnter($event, list.id)"></textarea>
 
-        <button class="new_card_create_btn" (click)="add_card(cardName.value, list.id)">Add</button>
-    </div>
+    <button class="new_card_create_btn" (click)="add_card(list.id)">Add</button>
+</div>

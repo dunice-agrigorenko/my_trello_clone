@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, ElementRef, EventEmitter } from '@angular/core';
-import { BoardsArray } from './boards-array';
+import { BoardsArray } from '../board/boards-array';
 import { Lists } from '../list/list';
-
-let LISTS: Lists[] = [];
 
 @Component({
     selector: 'board-entry',
@@ -19,9 +17,9 @@ export class BoardEntry {
 
     show: boolean = false;
     boards_array: Array<BoardsArray> = [];
-    lists = LISTS;
     visibility_newBoard: boolean = true;
     visibility_newForm: boolean = false;
+    board_title: string;
 
     public elementRef;
 
@@ -47,7 +45,6 @@ export class BoardEntry {
                 break;
             }
         }
-
         var serialObj = JSON.stringify(dataArray);
         localStorage.setItem("Boards", serialObj);
         this.boards_array = dataArray;
@@ -55,10 +52,10 @@ export class BoardEntry {
 
     confirm(id) { /* Принятие изменений, при редактировании названия доски */
         var dataArray = JSON.parse(localStorage.getItem("Boards"));
-        if (this.board.title.trim() != "") {
+        if (this.board_title.trim() != "") {
             for (var i = 0; i < dataArray.length; i++) {
                 if (dataArray[i].id == id) {
-                    dataArray[i].title = this.board.title.trim();
+                    dataArray[i].title = this.board_title.trim();
                     this.confirmChanges.emit(dataArray);
                     break;
                 }
@@ -69,6 +66,7 @@ export class BoardEntry {
         this.boards_array = dataArray;
         this.show = false;
     }
+
     outClick(event) {
         var clickedComponent = event.target;
         var inside = false;
@@ -80,7 +78,6 @@ export class BoardEntry {
         } while (clickedComponent);
         if (!inside) {
             this.show = false;
-            console.log("Q")
         }
     }
 }
